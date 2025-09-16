@@ -19,6 +19,11 @@ jobs:
       with:
         python-version: '3.8'
 
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+
     - name: Install system dependencies
       run: |
         sudo apt-get update
@@ -28,11 +33,11 @@ jobs:
       run: |
         pip install --upgrade Cython==0.29.33
 
-    - name: Build with Buildozer (Fixed)
+    - name: Build with Buildozer
       uses: digreatbrian/buildozer-action@v1
-      id: buildozer
       with:
-        command: android debug
+        buildozer-cmd: android debug
+        workdir: .
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
@@ -50,6 +55,7 @@ jobs:
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
       
