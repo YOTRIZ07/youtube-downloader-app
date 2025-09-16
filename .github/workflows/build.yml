@@ -27,14 +27,22 @@ jobs:
 
     - name: Debug system info and libtinfo
       run: |
+        set -e
         lsb_release -a
         dpkg -l | grep libtinfo || echo "libtinfo not installed"
 
     - name: Install libtinfo6 (replacement for libtinfo5)
-      run: sudo apt-get update && sudo apt-get install -y libtinfo6
+      run: |
+        set -e
+        sudo apt-get update
+        sudo apt-get install -y libtinfo6
 
     - name: Install system dependencies
-      run: sudo apt-get update && sudo apt-get install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+      run: |
+        set -e
+        sudo apt-get update
+        sudo apt-get install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev \
+          libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev build-essential
 
     - name: Install Cython
       run: pip install --upgrade Cython==0.29.33
