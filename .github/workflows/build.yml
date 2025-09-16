@@ -29,10 +29,11 @@ jobs:
         pip install --upgrade Cython==0.29.33
 
     - name: Build with Buildozer
-      uses: MrYsLab/buildozer-action@v1.2
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
       with:
-        workdir: .
         command: android debug
+        buildozer_version: stable
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
@@ -50,6 +51,7 @@ jobs:
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       
    
