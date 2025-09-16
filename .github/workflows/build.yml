@@ -30,7 +30,7 @@ jobs:
         
     - - name: Build with Buildozer
   uses: MrYsLab/buildozer-action@v1.2
-    workdir: .
+    
     # Optional, specify buildozer version here
     command: android debug
 
