@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout code
@@ -27,22 +27,13 @@ jobs:
 
     - name: Debug system info and libtinfo
       run: |
-        set -e
         lsb_release -a
         dpkg -l | grep libtinfo || echo "libtinfo not installed"
 
-    - name: Install libtinfo6 (replacement for libtinfo5)
-      run: |
-        set -e
-        sudo apt-get update
-        sudo apt-get install -y libtinfo6
-
     - name: Install system dependencies
       run: |
-        set -e
         sudo apt-get update
-        sudo apt-get install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev \
-          libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev build-essential
+        sudo apt-get install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
 
     - name: Install Cython
       run: pip install --upgrade Cython==0.29.33
@@ -69,6 +60,8 @@ jobs:
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 
 
 
